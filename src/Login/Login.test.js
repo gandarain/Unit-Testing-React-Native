@@ -6,10 +6,10 @@ import renderer from 'react-test-renderer';
 describe('Login', () => {
   const wrapper = shallow(<Login />);
   const instaceOf = wrapper.instance();
+  const rendered = renderer.create(<Login />);
 
   it('renders correctly', () => {
-    const rendered = renderer.create(<Login />).toJSON();
-    expect(rendered).toBeTruthy();
+    expect(rendered.toJSON()).toBeTruthy();
   });
 
   it('should check `componentDidMount()`', () => {
@@ -41,38 +41,54 @@ describe('Login', () => {
     });
   });
 
-  // it('should render the Email', () => {
-  //   let form = wrapper.find('Form');
-  //   expect(form.find('[id="email"]')).toHaveLength(1);
-  // });
-
-  // it('should render the Text Element', () => {
-  //   expect(wrapper.find('Text')).toHaveLength(2);
-  // });
-
-  // it('should render the Text Input Element', () => {
-  //   expect(wrapper.find('TextInput')).toHaveLength(4);
-  // });
+  it('should render the Text Input Element', () => {
+    expect(
+      wrapper
+        .find('Form')
+        .dive()
+        .find('TextInput'),
+    ).toHaveLength(4);
+  });
 
   it('should render the TouchableOpacity Element', () => {
     expect(wrapper.find('TouchableOpacity')).toHaveLength(2);
   });
 
-  // it('should render text input email', () => {
-  //   expect(wrapper.find('[id="email"]')).toHaveLength(1);
-  // });
+  it('should render text input email', () => {
+    expect(
+      wrapper
+        .find('Form')
+        .dive()
+        .find('[id="email"]'),
+    ).toHaveLength(1);
+  });
 
-  // it('should render text input name', () => {
-  //   expect(wrapper.find('[id="name"]')).toHaveLength(1);
-  // });
+  it('should render text input name', () => {
+    expect(
+      wrapper
+        .find('Form')
+        .dive()
+        .find('[id="name"]'),
+    ).toHaveLength(1);
+  });
 
-  // it('should render text input password', () => {
-  //   expect(wrapper.find('[id="password"]')).toHaveLength(1);
-  // });
+  it('should render text input password', () => {
+    expect(
+      wrapper
+        .find('Form')
+        .dive()
+        .find('[id="password"]'),
+    ).toHaveLength(1);
+  });
 
-  // it('should render text input confirm password', () => {
-  //   expect(wrapper.find('[id="confirm_password"]')).toHaveLength(1);
-  // });
+  it('should render text input confirm password', () => {
+    expect(
+      wrapper
+        .find('Form')
+        .dive()
+        .find('[id="confirm_password"]'),
+    ).toHaveLength(1);
+  });
 
   it('email should like email format', async () => {
     await instaceOf.handleChangeEmail('gandarainpanjaitan@gmail.com');
